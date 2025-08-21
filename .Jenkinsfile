@@ -30,17 +30,24 @@ pipeline {
             agent any
             steps {
                 script {
-                    def jarFile = findFiles(glob: 'target/*.jar')[0]?.name
-                    if (!jarFile) {
-                        error "JAR file not found. Build failed."
+                    def files = findFiles('*.jar')
+                    def file = files ? files[0] : null
+                    if (file) {
+                        echo "Found file: ${file.name}"
+                    } else {
+                        error("No JAR files found to process")
                     }
-                    writeFile file: 'Dockerfile', text: """
-FROM jenkins/jenkins:lts
-COPY target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
-"""
-                    docker.build("my-app:${env.BUILD_ID}", "-f Dockerfile .")
-                }
+//                     def jarFile = findFiles(glob: 'target/*.jar')[0]?.name
+//                     if (!jarFile) {
+//                         error "JAR file not found. Build failed."
+//                     }
+//                     writeFile file: 'Dockerfile', text: """
+// FROM jenkins/jenkins:lts
+// COPY target/*.jar app.jar
+// ENTRYPOINT ["java", "-jar", "app.jar"]
+// """
+//                     docker.build("my-app:${env.BUILD_ID}", "-f Dockerfile .")
+                 }
             }
         }
     }
