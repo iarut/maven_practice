@@ -1,0 +1,15 @@
+git
+workflow-aggregator
+pipeline-stage-view
+blueocean
+credentials-binding
+configuration-as-code
+workflow-multibranch
+git-client
+github-branch-source
+mailer
+lockable-resources
+gradle
+jdk-tool
+docker-workflow
+docker-plugin

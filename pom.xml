@@ -7,6 +7,7 @@
     <groupId>org.example</groupId>
     <artifactId>maven_project</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -47,6 +48,26 @@
                             <mainClass>org.example.Main</mainClass> <!-- Замени на свой класс с main() -->
                         </manifest>
                     </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Docker Plugin -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.13</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal> <!-- если нужен пуш в реестр -->
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>your-dockerhub-username/jenkins-custom</repository>
+                    <tag>${project.version}</tag>
                 </configuration>
             </plugin>
         </plugins>
