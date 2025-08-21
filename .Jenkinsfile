@@ -30,10 +30,10 @@ pipeline {
             agent any
             steps {
                 script {
-                    def files = findFiles('*.jar')
+                    def files = findFiles('maven_project-1.0-SNAPSHOT.jar')
                     def file = files ? files[0] : null
                     if (file) {
-                        echo "Found file: ${file.name}"
+                        echo "Found file: maven_project-1.0-SNAPSHOT.jar"
                     } else {
                         error("No JAR files found to process")
                     }
