@@ -1,10 +1,21 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.8.8-openjdk-17'
+//     agent {
+//         docker {
+//             image 'maven:3.8.8-openjdk-17'
+//         }
+//     }
+    agent any
+        environment {
+            // Пусть Docker использует сокет хоста
+            DOCKER_HOST = "unix:///var/run/docker.sock"
         }
-    }
     stages {
+            stage('Checkout') {
+                steps {
+                    git 'https://github.com/iarut/maven_practice.git'
+                }
+            }
+
         stage('Version') {
             steps {
                 sh 'mvn --version'
