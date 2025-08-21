@@ -10,11 +10,6 @@ pipeline {
             DOCKER_HOST = "unix:///var/run/docker.sock"
         }
     stages {
-//         stage('Checkout') {
-//                 steps {
-//                     git 'https://github.com/iarut/maven_practice.git'
-//                 }
-//         }
 
         stage('Version') {
             steps {
@@ -24,11 +19,13 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn clean install'
+                stash includes: 'target/*.jar', name: 'builtJar'
             }
         }
        stage('Build Docker Image') {
            agent any
            steps {
+               unstash 'builtJar'
                script {
                    // Find the JAR file
                    def files = findFiles(glob: 'target/*.jar')
