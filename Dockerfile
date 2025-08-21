@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:lts
+FROM jenkins/jenkins:dind
 LABEL authors="Komputer"
 WORKDIR /app
 COPY /target/maven_project-1.0-SNAPSHOT.jar /app/maven_project-1.0-SNAPSHOT.jar
