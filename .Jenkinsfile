@@ -33,7 +33,8 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
             }
         }
     }
-    post {
+}
+post {
         success {
             steps {
                 echo 'Build completed successfully!'
@@ -45,4 +46,3 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
             }
         }
     }
-}
