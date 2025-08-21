@@ -10,11 +10,11 @@ pipeline {
             DOCKER_HOST = "unix:///var/run/docker.sock"
         }
     stages {
-            stage('Checkout') {
-                steps {
-                    git 'https://github.com/iarut/maven_practice.git'
-                }
-            }
+//         stage('Checkout') {
+//                 steps {
+//                     git 'https://github.com/iarut/maven_practice.git'
+//                 }
+//         }
 
         stage('Version') {
             steps {
