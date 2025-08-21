@@ -52,24 +52,31 @@
             </plugin>
 
             <!-- Maven Docker Plugin -->
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.13</version>
-                <executions>
-                    <execution>
-                        <id>default</id>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>push</goal> <!-- если нужен пуш в реестр -->
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <repository>your-dockerhub-username/jenkins-custom</repository>
-                    <tag>${project.version}</tag>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>io.fabric8</groupId>-->
+<!--                <artifactId>docker-maven-plugin</artifactId>-->
+<!--                <version>0.46.0</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>build-image</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>build</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <images>-->
+<!--                        <image>-->
+<!--                            <name>$/${docker.image.name}:${docker.image.tag}</name>-->
+<!--                            <build>-->
+<!--                                <dockerFile>${project.basedir}/Dockerfile</dockerFile>-->
+<!--                                <pull>true</pull>-->
+<!--                            </build>-->
+<!--                        </image>-->
+<!--                    </images>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 
