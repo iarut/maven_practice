@@ -24,7 +24,7 @@ pipeline {
                         error "JAR file not found. Build failed."
                     }
                     writeFile file: 'Dockerfile', text: """
-FROM openjdk:17-jdk-slim
+FROM jenkins/jenkins:dind
 COPY target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
 """
