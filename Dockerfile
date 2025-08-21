@@ -5,7 +5,7 @@ COPY /target/maven_project-1.0-SNAPSHOT.jar /app/maven_project-1.0-SNAPSHOT.jar
 CMD ["java", "-jar", "maven_project-1.0-SNAPSHOT.jar"]
 
 
-FROM jenkins/jenkins:lts
+FROM jenkins/jenkins:dind
 
 # Отключаем setup wizard
 ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
