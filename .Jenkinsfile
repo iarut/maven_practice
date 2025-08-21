@@ -43,7 +43,7 @@ pipeline {
        """
 
                    // Build Docker image using named arguments
-                   docker.build(image: "my-app:${env.BUILD_ID}", dockerfile: "Dockerfile")
+                   docker.build("my-app", "Dockerfile")
                }
            }
        }
