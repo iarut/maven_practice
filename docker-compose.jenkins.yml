@@ -1,0 +1,17 @@
+services:
+  jenkins:
+    build: .
+    container_name: my-jenkins
+    restart: always
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+
+      - ./init.groovy.d:/usr/share/jenkins/ref/init.groovy.d:ro
+    environment:
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+
+volumes:
+  jenkins_home:

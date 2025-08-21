@@ -11,5 +11,3 @@ mailer
 lockable-resources
 gradle
 jdk-tool
-docker-workflow
-docker-plugin
