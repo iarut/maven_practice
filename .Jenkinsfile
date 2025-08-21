@@ -26,30 +26,30 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        stage('Build Docker Image') {
-            agent any
-            steps {
-                script {
-                    def files = findFiles('maven_project-1.0-SNAPSHOT.jar')
-                    def file = files ? files[0] : null
-                    if (file) {
-                        echo "Found file: maven_project-1.0-SNAPSHOT.jar"
-                    } else {
-                        error("No JAR files found to process")
-                    }
-//                     def jarFile = findFiles(glob: 'target/*.jar')[0]?.name
-//                     if (!jarFile) {
-//                         error "JAR file not found. Build failed."
-//                     }
-//                     writeFile file: 'Dockerfile', text: """
-// FROM jenkins/jenkins:lts
-// COPY target/*.jar app.jar
-// ENTRYPOINT ["java", "-jar", "app.jar"]
-// """
-//                     docker.build("my-app:${env.BUILD_ID}", "-f Dockerfile .")
-                 }
-            }
-        }
+       stage('Build Docker Image') {
+           agent any
+           steps {
+               script {
+                   // Find the JAR file
+                   def files = findFiles(glob: 'target/*.jar')
+                   if (!files || files.length == 0) {
+                       error("No JAR files found to process")
+                   }
+                   def jarFile = files[0].name
+                   echo "Found JAR file: ${jarFile}"
+
+                   // Write Dockerfile
+                   writeFile file: 'Dockerfile', text: """
+       FROM openjdk:17-jdk-slim
+       COPY target/${jarFile} app.jar
+       ENTRYPOINT ["java", "-jar", "app.jar"]
+       """
+
+                   // Build Docker image using named arguments
+                   docker.build(image: "my-app:${env.BUILD_ID}", dockerfile: "Dockerfile")
+               }
+           }
+       }
     }
 }
 post {
